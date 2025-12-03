@@ -97,8 +97,61 @@
 
 ### Key Entities *(include if feature involves data)*
 
+<!--
+  ACTION REQUIRED: Define entities following constitution's type safety principle.
+  All entities MUST be immutable with explicit validation.
+-->
+
 - **[Entity 1]**: [What it represents, key attributes without implementation]
+  - Required fields: [list required fields with types]
+  - Validation rules: [e.g., "width > 0", "email format"]
+  - Relationships: [to other entities]
+  - Layer: [which architecture layer owns this model]
+
 - **[Entity 2]**: [What it represents, relationships to other entities]
+  - Required fields: [list required fields with types]
+  - Validation rules: [constraints]
+  - Relationships: [to other entities]
+  - Layer: [which architecture layer owns this model]
+
+### Architecture Layer Mapping *(for Clean Architecture projects)*
+
+<!--
+  ACTION REQUIRED: Map each functional requirement to architecture layers.
+  Follow strict dependency order: ui → presenter → usecase → repository → external
+-->
+
+**Layer Responsibilities for this Feature**:
+
+- **UI Layer**: [e.g., "Display screenshot preview widget", "Handle user selection gestures"]
+- **Presenter Layer**: [e.g., "Format screenshot dimensions for display", "Manage capture state"]
+- **UseCase Layer**: [e.g., "Orchestrate screenshot capture flow", "Validate capture parameters"]
+- **Repository Layer**: [e.g., "Abstract platform screenshot API", "Handle platform-specific errors"]
+- **External Layer**: [e.g., "Windows native screenshot implementation", "Method channel communication"]
+
+**Cross-Layer Data Flow**:
+```
+UI → Presenter → UseCase → Repository → External
+ ↓                                          ↓
+[User tap] → [Format request] → [Validate] → [Call platform] → [Win32 API]
+```
+
+### Platform Contract Changes *(for federated plugin features)*
+
+<!--
+  ACTION REQUIRED: Document any platform interface changes.
+  Changes MUST follow semver: additions = MINOR, breaking = MAJOR
+-->
+
+**New/Modified Methods**:
+- Method: `[methodName]`
+- Parameters: `{param1: type, param2: type}`
+- Return: `{field1: type, field2: type}`
+- Version impact: [MINOR/MAJOR/PATCH]
+- Backward compatibility: [Yes/No, explain]
+
+**Error Codes**:
+- `[ERROR_CODE]`: [When thrown, what it means]
 
 ## Success Criteria *(mandatory)*
 

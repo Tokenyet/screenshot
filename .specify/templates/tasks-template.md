@@ -23,6 +23,12 @@ description: "Task list template for feature implementation"
 - **Single project**: `src/`, `tests/` at repository root
 - **Web app**: `backend/src/`, `frontend/src/`
 - **Mobile**: `api/src/`, `ios/src/` or `android/src/`
+- **Flutter Federated Plugin**: 
+  - `[package_name]/lib/` for Dart code
+  - `[package_name]/test/` for tests
+  - `[package_name]_platform_interface/lib/` for contracts
+  - `[package_name]_[platform]/lib/` and `[package_name]_[platform]/[platform]/` for native
+- **Clean Architecture**: Within each package: `lib/[layer]/` where layer = ui, presenter, usecase, repository, external
 - Paths shown below assume single project - adjust based on plan.md structure
 
 <!-- 
@@ -69,6 +75,23 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] T008 Configure error handling and logging infrastructure
 - [ ] T009 Setup environment configuration management
 
+**For Flutter Federated Plugins**:
+
+- [ ] T004 Create platform interface package with abstract `[PluginName]Platform` class
+- [ ] T005 [P] Define shared data models in platform interface (immutable, strongly-typed)
+- [ ] T006 [P] Setup method channel contract definitions with versioning
+- [ ] T007 Create app-facing package that delegates to platform interface
+- [ ] T008 [P] Setup platform implementation package(s) with native code scaffolding
+- [ ] T009 Configure package dependency graph and version constraints
+
+**For Clean Architecture Layers**:
+
+- [ ] T010 Define layer directory structure (external → repository → usecase → presenter → ui)
+- [ ] T011 [P] Create repository interfaces (abstract classes in repository layer)
+- [ ] T012 [P] Create usecase interfaces and base classes
+- [ ] T013 Implement dependency injection setup (manual or using get_it/provider)
+- [ ] T014 Setup layer boundary validation (analyzer rules or manual review checklist)
+
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
 ---
@@ -79,21 +102,55 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 1 (MANDATORY per Constitution) ⚠️
 
-> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+> **CONSTITUTION REQUIREMENT: Test-First Development (Principle III)**
+> **All tests MUST be written FIRST, verified to FAIL, approved, then implementation begins**
 
-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T015 [P] [US1] Contract test for platform method channel in [package]_platform_interface/test/
+- [ ] T016 [P] [US1] Integration test for UI→Native flow in [package]/test/integration/
+- [ ] T017 [P] [US1] Unit test for UseCase layer logic in [package]/test/unit/[usecase]_test.dart
+- [ ] T018 [P] [US1] Unit test for Repository layer in [package]/test/unit/[repository]_test.dart
+- [ ] T019 [P] [US1] Mock implementation for testing without native dependencies
+- [ ] T020 [US1] **VERIFY ALL TESTS FAIL** (red phase) before proceeding to implementation
 
-### Implementation for User Story 1
+### Implementation for User Story 1 (Clean Architecture: External → Repository → UseCase → Presenter → UI)
 
-- [ ] T012 [P] [US1] Create [Entity1] model in src/models/[entity1].py
-- [ ] T013 [P] [US1] Create [Entity2] model in src/models/[entity2].py
-- [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
-- [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
-- [ ] T016 [US1] Add validation and error handling
-- [ ] T017 [US1] Add logging for user story 1 operations
+**Step 1: External Layer (Platform-specific)**
+
+- [ ] T021 [P] [US1] Implement native method handler in [package]_[platform]/[platform]/
+- [ ] T022 [P] [US1] Add parameter validation in native code
+- [ ] T023 [US1] Register platform implementation with platform interface
+
+**Step 2: Repository Layer (Abstraction)**
+
+- [ ] T024 [P] [US1] Create data models in [package]/lib/repository/models/
+- [ ] T025 [US1] Implement repository concrete class using platform interface
+- [ ] T026 [US1] Add error mapping (PlatformException → domain exceptions)
+
+**Step 3: UseCase Layer (Business Logic)**
+
+- [ ] T027 [P] [US1] Create usecase class in [package]/lib/usecase/
+- [ ] T028 [US1] Implement business logic and validation
+- [ ] T029 [US1] Handle orchestration of repository calls
+
+**Step 4: Presenter Layer (Presentation Logic)**
+
+- [ ] T030 [P] [US1] Create presenter/ViewModel in [package]/lib/presenter/
+- [ ] T031 [US1] Implement state management for UI
+- [ ] T032 [US1] Format data for display (dimensions, status messages)
+
+**Step 5: UI Layer (Flutter Widgets)**
+
+- [ ] T033 [P] [US1] Create UI widgets in [package]/lib/ui/
+- [ ] T034 [US1] Connect UI to presenter via state management
+- [ ] T035 [US1] Handle user interactions (buttons, gestures)
+
+**Verification**:
+
+- [ ] T036 [US1] **RUN ALL TESTS** - verify they now PASS (green phase)
+- [ ] T037 [US1] Verify no layer boundary violations (use grep or analyzer)
+- [ ] T038 [US1] **REFACTOR** while keeping tests green
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 

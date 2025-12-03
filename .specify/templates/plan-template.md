@@ -31,7 +31,15 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] **Clean Architecture Layers**: Feature respects dependency order (ui → presenter → usecase → repository → external)
+- [ ] **Federated Plugin Pattern**: Platform-specific code isolated in separate packages (if applicable)
+- [ ] **Test-First Development**: Tests written before implementation, all tests pass
+- [ ] **Platform Contracts**: Method channel contracts defined and versioned (if platform code involved)
+- [ ] **Type Safety**: All data models are immutable, strongly-typed, with validation
+- [ ] **Layer Boundaries**: No cross-layer jumps; each layer uses only the layer directly below
+- [ ] **Platform Interface**: Changes follow semver (MAJOR for breaking, MINOR for additions)
+
+**Constitution Version Checked Against**: 1.0.0
 
 ## Project Structure
 
@@ -89,6 +97,49 @@ api/
 
 ios/ or android/
 └── [platform-specific structure: feature modules, UI flows, platform tests]
+
+# [REMOVE IF UNUSED] Option 4: Flutter Federated Plugin (Clean Architecture)
+# Use this for Flutter plugins with platform-specific implementations
+
+# App-facing package (public API)
+screenshot/
+├── lib/
+│   ├── screenshot.dart              # Public API
+│   ├── src/
+│   │   ├── models/                  # Shared data models
+│   │   └── screenshot_base.dart     # Delegates to platform interface
+└── test/
+    └── screenshot_test.dart
+
+# Platform interface package (contracts)
+screenshot_platform_interface/
+├── lib/
+│   ├── screenshot_platform_interface.dart  # Abstract platform class
+│   └── src/
+│       ├── models/                         # Shared models (CapturedData, etc.)
+│       └── method_channel_screenshot.dart  # Default MethodChannel impl
+└── test/
+
+# Platform implementation packages (one per platform)
+screenshot_windows/
+├── lib/
+│   └── screenshot_windows.dart      # Windows registration
+├── windows/
+│   └── screenshot_windows_plugin.cpp # Native C++ implementation
+└── test/
+    └── screenshot_windows_test.dart
+
+screenshot_android/  # Future
+screenshot_ios/      # Future
+screenshot_macos/    # Future
+screenshot_linux/    # Future
+
+# Clean Architecture Layers (within each package where applicable):
+# - ui/           : Flutter widgets, UI state
+# - presenter/    : Presentation logic, formatters
+# - usecase/      : Business logic orchestration
+# - repository/   : Platform abstraction, data sources
+# - external/     : Platform channels, native code
 ```
 
 **Structure Decision**: [Document the selected structure and reference the real
