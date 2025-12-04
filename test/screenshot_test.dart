@@ -6,9 +6,7 @@ import 'package:just_screenshot/screenshot.dart';
 import 'package:just_screenshot/screenshot_method_channel.dart';
 import 'package:just_screenshot/screenshot_platform_interface.dart';
 
-class MockScreenshotPlatform
-    with MockPlatformInterfaceMixin
-    implements ScreenshotPlatform {
+class MockScreenshotPlatform with MockPlatformInterfaceMixin implements ScreenshotPlatform {
   CapturedData? _mockResult;
   ScreenshotMode? _capturedMode;
   bool? _capturedIncludeCursor;
@@ -19,11 +17,7 @@ class MockScreenshotPlatform
   }
 
   @override
-  Future<CapturedData?> capture({
-    required ScreenshotMode mode,
-    bool includeCursor = false,
-    int? displayId,
-  }) async {
+  Future<CapturedData?> capture({required ScreenshotMode mode, bool includeCursor = false, int? displayId}) async {
     _capturedMode = mode;
     _capturedIncludeCursor = includeCursor;
     _capturedDisplayId = displayId;
@@ -56,11 +50,7 @@ void main() {
 
     test('capture delegates to platform with correct parameters', () async {
       final Uint8List mockBytes = Uint8List.fromList(<int>[1, 2, 3, 4]);
-      final CapturedData mockData = CapturedData(
-        width: 1920,
-        height: 1080,
-        bytes: mockBytes,
-      );
+      final CapturedData mockData = CapturedData(width: 1920, height: 1080, bytes: mockBytes);
       fakePlatform.setMockResult(mockData);
 
       final CapturedData? result = await Screenshot.instance.capture(
@@ -78,20 +68,14 @@ void main() {
     test('capture returns null when platform returns null', () async {
       fakePlatform.setMockResult(null);
 
-      final CapturedData? result = await Screenshot.instance.capture(
-        mode: ScreenshotMode.region,
-      );
+      final CapturedData? result = await Screenshot.instance.capture(mode: ScreenshotMode.region);
 
       expect(result, isNull);
     });
 
     test('capture with default parameters', () async {
       final Uint8List mockBytes = Uint8List.fromList(<int>[1, 2, 3]);
-      final CapturedData mockData = CapturedData(
-        width: 800,
-        height: 600,
-        bytes: mockBytes,
-      );
+      final CapturedData mockData = CapturedData(width: 800, height: 600, bytes: mockBytes);
       fakePlatform.setMockResult(mockData);
 
       await Screenshot.instance.capture(mode: ScreenshotMode.screen);

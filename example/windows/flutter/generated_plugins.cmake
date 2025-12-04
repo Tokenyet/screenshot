@@ -3,7 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  screenshot
+  just_screenshot
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

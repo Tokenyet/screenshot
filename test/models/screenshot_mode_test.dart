@@ -24,10 +24,7 @@ void main() {
     });
 
     test('fromValue throws ArgumentError for invalid value', () {
-      expect(
-        () => ScreenshotModeExtension.fromValue('invalid'),
-        throwsArgumentError,
-      );
+      expect(() => ScreenshotModeExtension.fromValue('invalid'), throwsArgumentError);
     });
 
     test('enum values are correctly defined', () {

@@ -24,10 +24,7 @@ void main() {
     test('capture method is unimplemented in base class', () {
       final ScreenshotPlatform platform = TestScreenshotPlatform();
 
-      expect(
-        () => platform.capture(mode: ScreenshotMode.screen),
-        throwsUnimplementedError,
-      );
+      expect(() => platform.capture(mode: ScreenshotMode.screen), throwsUnimplementedError);
     });
 
     test('verifyToken protects platform instance', () {

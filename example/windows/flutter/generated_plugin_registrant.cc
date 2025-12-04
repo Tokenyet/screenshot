@@ -6,7 +6,7 @@
 
 #include "generated_plugin_registrant.h"
 
-#include <screenshot/screenshot_plugin_c_api.h>
+#include <just_screenshot/screenshot_plugin_c_api.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   ScreenshotPluginCApiRegisterWithRegistrar(
