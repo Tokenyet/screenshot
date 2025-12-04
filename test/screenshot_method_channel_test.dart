@@ -1,9 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:screenshot/screenshot_method_channel.dart';
-import 'package:screenshot/src/models/captured_data.dart';
-import 'package:screenshot/src/models/screenshot_exception.dart';
-import 'package:screenshot/src/models/screenshot_mode.dart';
+import 'package:just_screenshot/screenshot_method_channel.dart';
+import 'package:just_screenshot/src/models/captured_data.dart';
+import 'package:just_screenshot/src/models/screenshot_exception.dart';
+import 'package:just_screenshot/src/models/screenshot_mode.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();

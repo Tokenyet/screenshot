@@ -2,9 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-import 'package:screenshot/screenshot.dart';
-import 'package:screenshot/screenshot_method_channel.dart';
-import 'package:screenshot/screenshot_platform_interface.dart';
+import 'package:just_screenshot/screenshot.dart';
+import 'package:just_screenshot/screenshot_method_channel.dart';
+import 'package:just_screenshot/screenshot_platform_interface.dart';
 
 class MockScreenshotPlatform
     with MockPlatformInterfaceMixin

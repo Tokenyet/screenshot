@@ -1,4 +1,4 @@
-# screenshot
+# just_screenshot
 
 A Flutter plugin for capturing screenshots on Windows desktop. Supports full screen capture and interactive region selection.
 
@@ -25,7 +25,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  screenshot: ^0.1.0
+  just_screenshot: ^0.1.0
 ```
 
 Then run:
@@ -39,7 +39,7 @@ flutter pub get
 ### Capture Full Screen
 
 ```dart
-import 'package:screenshot/screenshot.dart';
+import 'package:just_screenshot/screenshot.dart';
 
 // Capture the entire primary display
 final CapturedData? data = await Screenshot.instance.capture(

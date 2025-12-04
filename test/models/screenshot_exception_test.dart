@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:screenshot/src/models/screenshot_exception.dart';
+import 'package:just_screenshot/src/models/screenshot_exception.dart';
 
 void main() {
   group('ScreenshotException', () {

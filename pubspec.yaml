@@ -1,4 +1,4 @@
-name: screenshot
+name: just_screenshot
 description: "Windows screenshot plugin for Flutter - capture full screen or select regions interactively"
 version: 0.1.0
 homepage: https://github.com/Tokenyet/screenshot

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:screenshot/screenshot.dart';
+import 'package:just_screenshot/screenshot.dart';
 
 void main() {
   runApp(const MyApp());

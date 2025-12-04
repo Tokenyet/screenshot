@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:screenshot/src/models/captured_data.dart';
+import 'package:just_screenshot/src/models/captured_data.dart';
 
 void main() {
   group('CapturedData', () {
