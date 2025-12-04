@@ -34,8 +34,9 @@ void main() {
 
       expect(log, hasLength(1));
       expect(log.first.method, equals('capture'));
-      expect(log.first.arguments['mode'], equals('screen'));
-      expect(log.first.arguments['includeCursor'], equals(false));
+      final Map<dynamic, dynamic> args = log.first.arguments as Map<dynamic, dynamic>;
+      expect(args['mode'], equals('screen'));
+      expect(args['includeCursor'], equals(false));
     });
 
     test('capture returns CapturedData on success', () async {
@@ -101,7 +102,8 @@ void main() {
 
       await platform.capture(mode: ScreenshotMode.screen, includeCursor: false, displayId: 1);
 
-      expect(log.first.arguments['displayId'], equals(1));
+      final Map<dynamic, dynamic> args = log.first.arguments as Map<dynamic, dynamic>;
+      expect(args['displayId'], equals(1));
     });
 
     test('capture omits displayId when not provided', () async {
@@ -120,7 +122,8 @@ void main() {
 
       await platform.capture(mode: ScreenshotMode.screen);
 
-      expect(log.first.arguments.containsKey('displayId'), isFalse);
+      final Map<dynamic, dynamic> args = log.first.arguments as Map<dynamic, dynamic>;
+      expect(args.containsKey('displayId'), isFalse);
     });
 
     test('capture with region mode sends correct parameters', () async {
@@ -135,7 +138,8 @@ void main() {
 
       await platform.capture(mode: ScreenshotMode.region, includeCursor: false);
 
-      expect(log.first.arguments['mode'], equals('region'));
+      final Map<dynamic, dynamic> args = log.first.arguments as Map<dynamic, dynamic>;
+      expect(args['mode'], equals('region'));
     });
 
     // T065: Test for region mode
@@ -157,7 +161,8 @@ void main() {
 
       expect(log, hasLength(1));
       expect(log.first.method, equals('capture'));
-      expect(log.first.arguments['mode'], equals('region'));
+      final Map<dynamic, dynamic> args = log.first.arguments as Map<dynamic, dynamic>;
+      expect(args['mode'], equals('region'));
       expect(result, isNotNull);
       expect(result!.width, equals(800));
       expect(result.height, equals(600));
